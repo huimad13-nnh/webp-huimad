@@ -1,0 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<title>Learn JPA</title>
+<%@ include file="views/head.jsp"%>
+</head>
+<body>
+	<%@ include file="views/topbar.jsp"%>
+	<div class="container">
+		<h2>Learn JPA: Login/Register + CRUD Category (Hibernate + Validation)</h2>
+		<ul>
+			<li><a href="${ctx}/login">Đăng nhập (Session + Cookie)</a></li>
+			<li><a href="${ctx}/register">Đăng ký</a></li>
+			<li><a href="${ctx}/admin/category/list">CRUD Category (cần đăng nhập admin)</a></li>
+		</ul>
+		<p class="text-muted">Tài khoản mẫu: admin/123, manager/123, user/123</p>
+	</div>
+</body>
+</html>
