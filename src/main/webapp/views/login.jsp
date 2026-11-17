@@ -17,6 +17,9 @@
 			<c:if test="${param.activated != null}">
 				<div class="alert alert-success">Kích hoạt tài khoản thành công, mời bạn đăng nhập.</div>
 			</c:if>
+			<c:if test="${param.reset != null}">
+				<div class="alert alert-success">Đổi mật khẩu thành công, mời bạn đăng nhập bằng mật khẩu mới.</div>
+			</c:if>
 			<div class="mb-3">
 				<input type="text" placeholder="Tài khoản" name="username" class="form-control"
 					value="<c:out value='${param.username}'/>">
@@ -30,6 +33,9 @@
 			</div>
 			<button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
 			<p class="mt-3 mb-0 text-center">
+				<a href="${pageContext.request.contextPath}/forgot-password">Quên mật khẩu?</a>
+			</p>
+			<p class="mt-2 mb-0 text-center">
 				Chưa có tài khoản? <a href="${pageContext.request.contextPath}/register">Đăng ký</a>
 			</p>
 		</form>

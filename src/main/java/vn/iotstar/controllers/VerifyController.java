@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.iotstar.models.PendingRegistration;
+import vn.iotstar.models.PendingOtp;
 import vn.iotstar.services.UserService;
 import vn.iotstar.services.impl.UserServiceImpl;
 import vn.iotstar.utils.Constant;
@@ -30,7 +30,7 @@ public class VerifyController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PendingRegistration pending = getPending(req);
+		PendingOtp pending = getPending(req);
 		if (pending == null) {
 			// Session hết hạn hoặc chưa đăng ký -> đăng ký lại
 			resp.sendRedirect(req.getContextPath() + "/register");
@@ -69,8 +69,8 @@ public class VerifyController extends HttpServlet {
 		resp.sendRedirect(req.getContextPath() + "/login?activated=1");
 	}
 
-	private PendingRegistration getPending(HttpServletRequest req) {
+	private PendingOtp getPending(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
-		return session == null ? null : (PendingRegistration) session.getAttribute(Constant.SESSION_PENDING);
+		return session == null ? null : (PendingOtp) session.getAttribute(Constant.SESSION_PENDING);
 	}
 }
