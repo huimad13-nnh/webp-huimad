@@ -25,8 +25,30 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public User findByEmail(String email) {
+		EntityManager em = JPAConfig.getEntityManager();
+		try {
+			List<User> list = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
+					.setParameter("email", email)
+					.getResultList();
+			return list.isEmpty() ? null : list.get(0);
+		} finally {
+			em.close();
+		}
+	}
+
+	@Override
 	public void insert(User user) {
 		inTransaction(em -> em.persist(user)); // INSERT; Hibernate kiểm tra validation trước khi ghi
+	}
+
+	@Override
+	public void updatePassword(int id, String password) {
+		// Chỉ UPDATE cột password, không đụng các cột khác
+		inTransaction(em -> em.createQuery("UPDATE User u SET u.passWord = :password WHERE u.id = :id")
+				.setParameter("password", password)
+				.setParameter("id", id)
+				.executeUpdate());
 	}
 
 	// begin -> làm việc -> commit; lỗi thì rollback

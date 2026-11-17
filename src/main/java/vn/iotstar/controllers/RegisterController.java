@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.iotstar.entity.User;
-import vn.iotstar.models.PendingRegistration;
+import vn.iotstar.models.PendingOtp;
 import vn.iotstar.services.UserService;
 import vn.iotstar.services.impl.UserServiceImpl;
 import vn.iotstar.utils.Constant;
@@ -44,7 +44,7 @@ public class RegisterController extends HttpServlet {
 		try {
 			alertMsg = service.checkRegister(user);
 			if (alertMsg == null) {
-				PendingRegistration pending = service.sendOtp(user);
+				PendingOtp pending = service.sendRegisterOtp(user);
 				req.getSession(true).setAttribute(Constant.SESSION_PENDING, pending);
 			}
 		} catch (RuntimeException e) {
