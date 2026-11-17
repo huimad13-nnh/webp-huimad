@@ -17,8 +17,7 @@
 			<property name="jakarta.persistence.jdbc.url"
 				value="jdbc:sqlserver://localhost:1433;databaseName=ShoppingServiceMVC;encrypt=true;trustServerCertificate=true" />
 			<property name="jakarta.persistence.jdbc.user" value="sa" />
-			<!-- TODO: đổi thành mật khẩu sa trên máy bạn -->
-			<property name="jakarta.persistence.jdbc.password" value="huimad" />
+			<!-- Mật khẩu: đặt biến môi trường DB_PASSWORD (đọc trong JPAConfig) -->
 
 			<!-- update: tự tạo bảng nếu chưa có, không xoá dữ liệu -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
