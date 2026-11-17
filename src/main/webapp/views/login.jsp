@@ -14,8 +14,8 @@
 			<c:if test="${alert != null}">
 				<div class="alert alert-danger">${alert}</div>
 			</c:if>
-			<c:if test="${param.registered != null}">
-				<div class="alert alert-success">Đăng ký thành công, mời bạn đăng nhập.</div>
+			<c:if test="${param.activated != null}">
+				<div class="alert alert-success">Kích hoạt tài khoản thành công, mời bạn đăng nhập.</div>
 			</c:if>
 			<div class="mb-3">
 				<input type="text" placeholder="Tài khoản" name="username" class="form-control"

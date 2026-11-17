@@ -1,6 +1,7 @@
 package vn.iotstar.dao.impl;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -25,11 +26,16 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void insert(User user) {
+		inTransaction(em -> em.persist(user)); // INSERT; Hibernate kiểm tra validation trước khi ghi
+	}
+
+	// begin -> làm việc -> commit; lỗi thì rollback
+	private void inTransaction(Consumer<EntityManager> work) {
 		EntityManager em = JPAConfig.getEntityManager();
 		EntityTransaction trans = em.getTransaction();
 		try {
 			trans.begin();
-			em.persist(user); // INSERT; Hibernate kiểm tra validation trước khi ghi
+			work.accept(em);
 			trans.commit();
 		} catch (RuntimeException e) {
 			if (trans.isActive()) {
