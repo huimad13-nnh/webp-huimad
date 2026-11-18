@@ -26,4 +26,11 @@ public class UploadUtil {
 		part.write(new File(uploadDir, fname).getAbsolutePath());
 		return fname;
 	}
+
+	/** Xoá file đã upload (bỏ qua nếu null/rỗng/không tồn tại). */
+	public static void delete(String fileName) {
+		if (fileName != null && !fileName.isBlank()) {
+			new File(Constant.DIR, fileName).delete();
+		}
+	}
 }

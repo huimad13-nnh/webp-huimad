@@ -25,6 +25,17 @@ CREATE TABLE Category(
 	[icons]     [nvarchar](255) NULL
 );
 GO
+-- 1 user - n video
+IF OBJECT_ID('Videos') IS NULL
+CREATE TABLE Videos(
+	[video_id]     [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[title]        [nvarchar](255) NOT NULL,
+	[description]  [nvarchar](max) NULL,
+	[url]          [nvarchar](255) NOT NULL,   -- tên file video trong D:\upload
+	[created_date] [datetime2](6) NOT NULL,
+	[user_id]      [int] NOT NULL FOREIGN KEY REFERENCES [User](id)
+);
+GO
 -- Tài khoản mẫu
 IF NOT EXISTS (SELECT 1 FROM [User] WHERE username = 'admin')
 INSERT INTO [User](email, username, fullname, password, roleid, phone, createdDate)

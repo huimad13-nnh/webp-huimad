@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.utils.Constant;
 
-// Trả ảnh trong thư mục upload: /image?fname=abc.png
+// Trả file (ảnh, video) trong thư mục upload: /image?fname=abc.png
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/image")
 public class DownloadImageController extends HttpServlet {
@@ -30,6 +30,8 @@ public class DownloadImageController extends HttpServlet {
 		}
 		String type = getServletContext().getMimeType(file.getName());
 		resp.setContentType(type != null ? type : "image/jpeg");
+		// shortcut: không hỗ trợ Range nên video phát được nhưng tua có thể không mượt; cần tua thì thêm xử lý header Range
+		resp.setContentLengthLong(file.length());
 		Files.copy(file.toPath(), resp.getOutputStream());
 	}
 }

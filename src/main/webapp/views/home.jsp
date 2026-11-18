@@ -26,6 +26,16 @@
 				</table>
 			</c:otherwise>
 		</c:choose>
+
+		<h3 class="mt-4 mb-3">10 video mới nhất</h3>
+		<div class="row g-3">
+			<c:forEach items="${videoList}" var="v">
+				<%@ include file="video/card.jspf"%>
+			</c:forEach>
+		</div>
+		<c:if test="${empty videoList}">
+			<p class="text-muted">Chưa có video nào.</p>
+		</c:if>
 	</div>
 </body>
 </html>
