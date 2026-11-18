@@ -1,13 +1,12 @@
 package vn.iotstar.services.impl;
 
-import java.io.File;
 import java.util.List;
 
 import vn.iotstar.dao.CategoryDao;
 import vn.iotstar.dao.impl.CategoryDaoImpl;
 import vn.iotstar.entity.Category;
 import vn.iotstar.services.CategoryService;
-import vn.iotstar.utils.Constant;
+import vn.iotstar.utils.UploadUtil;
 
 public class CategoryServiceImpl implements CategoryService {
 	CategoryDao categoryDao = new CategoryDaoImpl();
@@ -26,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 		oldCategory.setCatename(newCategory.getCatename());
 		// Có upload ảnh mới -> xoá ảnh cũ, lưu tên ảnh mới. Không có -> giữ ảnh cũ.
 		if (newCategory.getIcon() != null) {
-			deleteFile(oldCategory.getIcon());
+			UploadUtil.delete(oldCategory.getIcon());
 			oldCategory.setIcon(newCategory.getIcon());
 		}
 		categoryDao.update(oldCategory);
@@ -37,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = categoryDao.findById(id);
 		if (category != null) {
 			categoryDao.delete(id);
-			deleteFile(category.getIcon());
+			UploadUtil.delete(category.getIcon());
 		}
 	}
 
@@ -54,14 +53,5 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> search(String keyword) {
 		return categoryDao.search(keyword);
-	}
-
-	private void deleteFile(String fileName) {
-		if (fileName != null && !fileName.isBlank()) {
-			File file = new File(Constant.DIR, fileName);
-			if (file.exists()) {
-				file.delete();
-			}
-		}
 	}
 }

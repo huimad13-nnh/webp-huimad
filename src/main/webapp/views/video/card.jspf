@@ -1,0 +1,24 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%-- Thẻ 1 video, dùng trong c:forEach với var="v" (include tĩnh). showActions=true -> hiện nút Sửa/Xoá --%>
+<div class="col-12 col-sm-6 col-lg-4">
+	<div class="card h-100">
+		<c:url value="/image?fname=${v.url}" var="videoUrl" />
+		<video class="card-img-top bg-dark" src="${videoUrl}#t=0.5" preload="metadata" muted></video>
+		<div class="card-body">
+			<h5 class="card-title">
+				<a href="<c:url value='/video/detail?id=${v.id}'/>"><c:out value="${v.title}" /></a>
+			</h5>
+			<p class="card-text text-muted small mb-0">
+				<c:out value="${v.user.fullName}" /> · ${v.createdDate.toLocalDate()}
+			</p>
+		</div>
+		<c:if test="${showActions}">
+			<div class="card-footer">
+				<a class="btn btn-sm btn-outline-primary" href="<c:url value='/video/edit?id=${v.id}'/>">Sửa</a>
+				<a class="btn btn-sm btn-outline-danger" href="<c:url value='/video/delete?id=${v.id}'/>"
+					onclick="return confirm('Xoá video này?')">Xoá</a>
+			</div>
+		</c:if>
+	</div>
+</div>

@@ -8,6 +8,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>vn.iotstar.entity.User</class>
 		<class>vn.iotstar.entity.Category</class>
+		<class>vn.iotstar.entity.Video</class>
 
 		<!-- AUTO: có hibernate-validator trên classpath thì tự kiểm tra @NotBlank, @Email... trước khi persist/merge -->
 		<validation-mode>AUTO</validation-mode>
