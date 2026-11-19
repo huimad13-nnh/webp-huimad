@@ -14,9 +14,16 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Videos")
+@Getter
+@Setter
+@NoArgsConstructor // JPA cần constructor rỗng
 public class Video implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,20 +49,4 @@ public class Video implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-
-	public Video() {
-	}
-
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id; }
-	public String getTitle() { return title; }
-	public void setTitle(String title) { this.title = title; }
-	public String getDescription() { return description; }
-	public void setDescription(String description) { this.description = description; }
-	public String getUrl() { return url; }
-	public void setUrl(String url) { this.url = url; }
-	public LocalDateTime getCreatedDate() { return createdDate; }
-	public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
-	public User getUser() { return user; }
-	public void setUser(User user) { this.user = user; }
 }

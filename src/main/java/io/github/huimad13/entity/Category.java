@@ -12,10 +12,17 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Category")
 @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+@Getter
+@Setter
+@NoArgsConstructor // JPA cần constructor rỗng
 public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +36,4 @@ public class Category implements Serializable {
 
 	@Column(name = "icons", columnDefinition = "nvarchar(255)")
 	private String icon;
-
-	public Category() {
-	}
-
-	public int getCateid() { return cateid; }
-	public void setCateid(int cateid) { this.cateid = cateid; }
-	public String getCatename() { return catename; }
-	public void setCatename(String catename) { this.catename = catename; }
-	public String getIcon() { return icon; }
-	public void setIcon(String icon) { this.icon = icon; }
 }

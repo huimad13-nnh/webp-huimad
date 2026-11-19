@@ -4,9 +4,7 @@ import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import jakarta.validation.ConstraintViolation;
 import io.github.huimad13.dao.UserDao;
 import io.github.huimad13.dao.impl.UserDaoImpl;
 import io.github.huimad13.entity.User;
@@ -80,12 +78,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String resetPassword(PendingOtp pending, String otp, String newPassword) {
 		// Kiểm tra mật khẩu mới TRƯỚC, để mật khẩu không hợp lệ không làm mất lượt nhập OTP
-		Set<ConstraintViolation<User>> violations = ValidationUtil.factory.getValidator()
-				.validateValue(User.class, "passWord", newPassword);
-		if (!violations.isEmpty()) {
-			return violations.iterator().next().getMessage();
+		String error = ValidationUtil.validateValue(User.class, "passWord", newPassword);
+		if (error != null) {
+			return error;
 		}
-		String error = checkOtp(pending, otp);
+		error = checkOtp(pending, otp);
 		if (error != null) {
 			return error;
 		}

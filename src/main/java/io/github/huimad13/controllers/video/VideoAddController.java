@@ -30,10 +30,13 @@ public class VideoAddController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String error = UploadUtil.check(req, "file", UploadUtil.VIDEO_EXTS);
 		Video video = VideoEditController.readForm(req);
-		Part file = req.getPart("file");
+		Part file = error == null ? req.getPart("file") : null;
 
-		String error = ValidationUtil.validate(video);
+		if (error == null) {
+			error = ValidationUtil.validate(video);
+		}
 		if (error == null && (file == null || file.getSize() == 0)) {
 			error = "Chưa chọn file video";
 		}

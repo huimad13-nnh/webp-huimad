@@ -22,7 +22,7 @@ public class CategoryEditController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Category category = cateService.get(Integer.parseInt(req.getParameter("id")));
+		Category category = find(req.getParameter("id"));
 		if (category == null) {
 			resp.sendRedirect(req.getContextPath() + "/admin/category/list");
 			return;
@@ -33,15 +33,25 @@ public class CategoryEditController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String error = UploadUtil.check(req, "icon", UploadUtil.IMAGE_EXTS);
+		Category old = find(req.getParameter("cateid"));
+		if (old == null) {
+			resp.sendRedirect(req.getContextPath() + "/admin/category/list");
+			return;
+		}
 		String catename = req.getParameter("catename");
 		Category category = new Category();
-		category.setCateid(Integer.parseInt(req.getParameter("cateid")));
+		category.setCateid(old.getCateid());
 		category.setCatename(catename == null ? null : catename.trim());
 
-		String error = ValidationUtil.validate(category);
+		if (error == null) {
+			error = ValidationUtil.validate(category);
+		}
 		if (error != null) {
+			// Giữ tên vừa nhập để người dùng sửa tiếp, ảnh vẫn là ảnh cũ
+			category.setIcon(old.getIcon());
 			req.setAttribute("alert", error);
-			req.setAttribute("category", cateService.get(category.getCateid()));
+			req.setAttribute("category", category);
 			req.getRequestDispatcher("/views/admin/edit-category.jsp").forward(req, resp);
 			return;
 		}
@@ -50,5 +60,14 @@ public class CategoryEditController extends HttpServlet {
 		category.setIcon(UploadUtil.save(req.getPart("icon")));
 		cateService.edit(category);
 		resp.sendRedirect(req.getContextPath() + "/admin/category/list");
+	}
+
+	/** Danh mục theo id, hoặc null nếu id sai định dạng / không tồn tại. */
+	private Category find(String id) {
+		try {
+			return cateService.get(Integer.parseInt(id));
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 }
