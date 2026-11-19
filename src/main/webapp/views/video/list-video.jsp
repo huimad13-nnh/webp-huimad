@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Video của tôi</title>
-<%@ include file="../head.jsp"%>
 </head>
 <body>
-	<%@ include file="../topbar.jsp"%>
 	<div class="container">
 		<div class="d-flex justify-content-between align-items-center mb-3">
 			<h2>Video của tôi</h2>

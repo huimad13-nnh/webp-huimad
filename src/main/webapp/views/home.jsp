@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Trang chủ</title>
-<%@ include file="head.jsp"%>
 </head>
 <body>
-	<%@ include file="topbar.jsp"%>
 	<div class="container">
 		<h2>Trang: ${pageContext.request.servletPath}</h2>
 		<c:choose>

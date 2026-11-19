@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title><c:out value="${video.title}" /></title>
-<%@ include file="../head.jsp"%>
 </head>
 <body>
-	<%@ include file="../topbar.jsp"%>
 	<div class="container" style="max-width: 900px">
 		<c:url value="/image?fname=${video.url}" var="videoUrl" />
 		<video class="w-100 bg-dark rounded" src="${videoUrl}" controls autoplay></video>
