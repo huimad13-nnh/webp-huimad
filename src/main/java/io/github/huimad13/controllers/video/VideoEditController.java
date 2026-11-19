@@ -56,6 +56,7 @@ public class VideoEditController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String error = UploadUtil.check(req, "file", UploadUtil.VIDEO_EXTS);
 		Video old = findOwned(videoService, req);
 		if (old == null) {
 			resp.sendRedirect(req.getContextPath() + "/video");
@@ -64,10 +65,14 @@ public class VideoEditController extends HttpServlet {
 		Video video = readForm(req);
 		video.setId(old.getId());
 
-		String error = ValidationUtil.validate(video);
+		if (error == null) {
+			error = ValidationUtil.validate(video);
+		}
 		if (error != null) {
+			// Giữ tiêu đề/mô tả vừa nhập, video vẫn là file cũ
+			video.setUrl(old.getUrl());
 			req.setAttribute("alert", error);
-			req.setAttribute("video", old);
+			req.setAttribute("video", video);
 			req.getRequestDispatcher("/views/video/edit-video.jsp").forward(req, resp);
 			return;
 		}

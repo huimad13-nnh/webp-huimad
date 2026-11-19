@@ -26,7 +26,7 @@
 				<c:url value="/image?fname=${video.url}" var="videoUrl" />
 				<video class="d-block mb-2 w-100" src="${videoUrl}" controls preload="metadata"></video>
 				<label class="form-label" for="file">File video mới (bỏ trống nếu giữ video cũ)</label>
-				<input class="form-control" id="file" type="file" name="file" accept="video/*" />
+				<input class="form-control" id="file" type="file" name="file" accept=".mp4,.webm,.ogg,.mov" />
 			</div>
 			<button type="submit" class="btn btn-primary">Cập nhật</button>
 			<a href="<c:url value='/video'/>" class="btn btn-link">Quay lại</a>

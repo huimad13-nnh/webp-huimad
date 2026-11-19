@@ -16,7 +16,7 @@
 			<input name="cateid" value="${category.cateid}" type="hidden">
 			<div class="mb-3">
 				<label class="form-label">Tên danh mục:</label>
-				<input type="text" class="form-control" name="catename" required
+				<input type="text" class="form-control" name="catename" required maxlength="255"
 					value="<c:out value='${category.catename}'/>" />
 			</div>
 			<div class="mb-3">
@@ -25,7 +25,7 @@
 					<img class="d-block mb-2" width="100" src="${imgUrl}" alt="">
 				</c:if>
 				<label class="form-label">Ảnh đại diện (bỏ trống nếu giữ ảnh cũ)</label>
-				<input class="form-control" type="file" name="icon" accept="image/*" />
+				<input class="form-control" type="file" name="icon" accept=".jpg,.jpeg,.png,.gif,.webp" />
 			</div>
 			<button type="submit" class="btn btn-primary">Cập nhật</button>
 			<button type="reset" class="btn btn-secondary">Reset</button>

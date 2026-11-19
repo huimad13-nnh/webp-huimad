@@ -14,7 +14,7 @@
 				<div class="alert alert-danger">${alert}</div>
 			</c:if>
 			<div class="mb-3">
-				<input type="email" name="email" class="form-control" placeholder="Email" required
+				<input type="email" name="email" class="form-control" placeholder="Email" required maxlength="255"
 					value="<c:out value='${param.email}'/>">
 			</div>
 			<button type="submit" class="btn btn-primary w-100">Gửi mã OTP</button>

@@ -35,4 +35,10 @@ public class ValidationUtil {
 		}
 		return sb.toString();
 	}
+
+	/** Kiểm tra 1 giá trị theo annotation của 1 field, vd validateValue(User.class, "email", email). */
+	public static <T> String validateValue(Class<T> type, String property, Object value) {
+		Set<ConstraintViolation<T>> violations = factory.getValidator().validateValue(type, property, value);
+		return violations.isEmpty() ? null : violations.iterator().next().getMessage();
+	}
 }

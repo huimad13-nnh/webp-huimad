@@ -7,10 +7,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import io.github.huimad13.entity.User;
 import io.github.huimad13.models.PendingOtp;
 import io.github.huimad13.services.UserService;
 import io.github.huimad13.services.impl.UserServiceImpl;
 import io.github.huimad13.utils.Constant;
+import io.github.huimad13.utils.ValidationUtil;
 
 // Quên mật khẩu bước 1: nhập email -> gửi OTP -> sang /reset-password
 @SuppressWarnings("serial")
@@ -27,13 +29,14 @@ public class ForgotPasswordController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		email = email == null ? "" : email.trim();
-		if (email.isEmpty()) {
-			req.setAttribute("alert", "Email không được rỗng");
+		// Dùng lại @NotBlank/@Email trên User.email
+		String error = ValidationUtil.validateValue(User.class, "email", email);
+		if (error != null) {
+			req.setAttribute("alert", error);
 			req.getRequestDispatcher(Constant.Path.FORGOT_PASSWORD).forward(req, resp);
 			return;
 		}
 
-		String error = null;
 		try {
 			PendingOtp pending = service.sendResetOtp(email);
 			if (pending == null) {

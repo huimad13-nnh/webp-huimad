@@ -52,8 +52,9 @@ public class LoginController extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		boolean isRememberMe = "on".equals(req.getParameter("remember"));
+		username = username == null ? "" : username.trim();
 
-		if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
+		if (username.isEmpty() || password == null || password.isEmpty()) {
 			req.setAttribute("alert", "Tài khoản hoặc mật khẩu không được rỗng");
 			req.getRequestDispatcher(Constant.Path.LOGIN).forward(req, resp);
 			return;

@@ -23,7 +23,7 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="file">File video (tối đa 100MB)</label>
-				<input class="form-control" id="file" type="file" name="file" accept="video/*" required />
+				<input class="form-control" id="file" type="file" name="file" accept=".mp4,.webm,.ogg,.mov" required />
 			</div>
 			<button type="submit" class="btn btn-primary">Thêm</button>
 			<a href="<c:url value='/video'/>" class="btn btn-link">Quay lại</a>

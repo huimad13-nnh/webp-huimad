@@ -19,11 +19,11 @@
 				<div class="alert alert-success">Đổi mật khẩu thành công, mời bạn đăng nhập bằng mật khẩu mới.</div>
 			</c:if>
 			<div class="mb-3">
-				<input type="text" placeholder="Tài khoản" name="username" class="form-control"
+				<input type="text" placeholder="Tài khoản" name="username" class="form-control" required
 					value="<c:out value='${param.username}'/>">
 			</div>
 			<div class="mb-3">
-				<input type="password" placeholder="Mật khẩu" name="password" class="form-control">
+				<input type="password" placeholder="Mật khẩu" name="password" class="form-control" required>
 			</div>
 			<div class="form-check mb-3">
 				<input class="form-check-input" type="checkbox" name="remember" id="remember">

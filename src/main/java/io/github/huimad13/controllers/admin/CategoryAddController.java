@@ -27,11 +27,14 @@ public class CategoryAddController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String error = UploadUtil.check(req, "icon", UploadUtil.IMAGE_EXTS);
 		String catename = req.getParameter("catename");
 		Category category = new Category();
 		category.setCatename(catename == null ? null : catename.trim());
 
-		String error = ValidationUtil.validate(category);
+		if (error == null) {
+			error = ValidationUtil.validate(category);
+		}
 		if (error != null) {
 			req.setAttribute("alert", error);
 			req.getRequestDispatcher("/views/admin/add-category.jsp").forward(req, resp);

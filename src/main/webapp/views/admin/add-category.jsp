@@ -14,11 +14,12 @@
 		<form role="form" action="<c:url value='/admin/category/add'/>" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label class="form-label">Tên danh mục:</label>
-				<input class="form-control" placeholder="Nhập tên danh mục" name="catename" required />
+				<input class="form-control" placeholder="Nhập tên danh mục" name="catename" required maxlength="255"
+					value="<c:out value='${param.catename}'/>" />
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Ảnh đại diện</label>
-				<input class="form-control" type="file" name="icon" accept="image/*" />
+				<input class="form-control" type="file" name="icon" accept=".jpg,.jpeg,.png,.gif,.webp" />
 			</div>
 			<button type="submit" class="btn btn-primary">Thêm</button>
 			<button type="reset" class="btn btn-secondary">Huỷ</button>

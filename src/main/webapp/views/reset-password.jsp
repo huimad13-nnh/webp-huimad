@@ -25,10 +25,12 @@
 			</div>
 			<div class="mb-3">
 				<input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" required
+					minlength="3" maxlength="255"
 					autocomplete="new-password">
 			</div>
 			<div class="mb-3">
 				<input type="password" name="confirm" class="form-control" placeholder="Nhập lại mật khẩu mới" required
+					minlength="3" maxlength="255"
 					autocomplete="new-password">
 			</div>
 			<button type="submit" name="action" value="reset" class="btn btn-primary w-100 mb-2">Đổi mật khẩu</button>
