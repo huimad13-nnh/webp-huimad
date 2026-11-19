@@ -6,9 +6,9 @@
 
 	<persistence-unit name="learn-jpa" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>vn.iotstar.entity.User</class>
-		<class>vn.iotstar.entity.Category</class>
-		<class>vn.iotstar.entity.Video</class>
+		<class>io.github.huimad13.entity.User</class>
+		<class>io.github.huimad13.entity.Category</class>
+		<class>io.github.huimad13.entity.Video</class>
 
 		<!-- AUTO: có hibernate-validator trên classpath thì tự kiểm tra @NotBlank, @Email... trước khi persist/merge -->
 		<validation-mode>AUTO</validation-mode>
