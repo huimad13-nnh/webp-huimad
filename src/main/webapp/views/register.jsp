@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Đăng ký</title>
-<%@ include file="head.jsp"%>
 </head>
 <body>
-	<%@ include file="topbar.jsp"%>
 	<div class="container" style="max-width: 480px">
 		<form action="${pageContext.request.contextPath}/register" method="post" class="card card-body">
 			<h2 class="mb-3">Tạo tài khoản mới</h2>

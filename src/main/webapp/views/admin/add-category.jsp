@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Thêm danh mục</title>
-<%@ include file="../head.jsp"%>
 </head>
 <body>
-	<%@ include file="../topbar.jsp"%>
 	<div class="container" style="max-width: 560px">
 		<h2>Thêm danh mục</h2>
 		<c:if test="${alert != null}">

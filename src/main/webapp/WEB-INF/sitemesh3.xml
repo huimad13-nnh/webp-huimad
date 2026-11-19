@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<!-- Mọi trang HTML dùng layout chung -->
+	<mapping path="/*" decorator="web.jsp" />
+	<!-- Trang quản trị dùng template Simple Sidebar -->
+	<mapping path="/admin/*" decorator="admin.jsp" />
+
+	<!-- Ảnh/video tải về: không cho qua SiteMesh (tránh buffer cả file vào RAM) -->
+	<mapping path="/image" exclude="true" />
+	<!-- File tĩnh của template -->
+	<mapping path="/templates/*" exclude="true" />
+</sitemesh>

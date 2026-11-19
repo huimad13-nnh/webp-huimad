@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Kích hoạt tài khoản</title>
-<%@ include file="head.jsp"%>
 </head>
 <body>
-	<%@ include file="topbar.jsp"%>
 	<div class="container" style="max-width: 420px">
 		<form action="${pageContext.request.contextPath}/verify" method="post" class="card card-body">
 			<h2 class="mb-3">Kích hoạt tài khoản</h2>

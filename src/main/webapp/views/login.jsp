@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Đăng nhập</title>
-<%@ include file="head.jsp"%>
 </head>
 <body>
-	<%@ include file="topbar.jsp"%>
 	<div class="container" style="max-width: 420px">
 		<form action="${pageContext.request.contextPath}/login" method="post" class="card card-body">
 			<h2 class="mb-3">Đăng nhập</h2>

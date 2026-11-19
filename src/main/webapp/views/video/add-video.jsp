@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Thêm video</title>
-<%@ include file="../head.jsp"%>
 </head>
 <body>
-	<%@ include file="../topbar.jsp"%>
 	<div class="container" style="max-width: 560px">
 		<h2>Thêm video</h2>
 		<c:if test="${alert != null}">

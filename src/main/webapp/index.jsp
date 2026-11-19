@@ -1,13 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <title>Learn JPA</title>
-<%@ include file="views/head.jsp"%>
 </head>
 <body>
-	<%@ include file="views/topbar.jsp"%>
 	<div class="container">
 		<h2>Learn JPA: Login/Register + CRUD Category (Hibernate + Validation)</h2>
 		<ul>

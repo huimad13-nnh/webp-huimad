@@ -4,10 +4,8 @@
 <html lang="vi">
 <head>
 <title>Đặt lại mật khẩu</title>
-<%@ include file="head.jsp"%>
 </head>
 <body>
-	<%@ include file="topbar.jsp"%>
 	<div class="container" style="max-width: 420px">
 		<form action="${pageContext.request.contextPath}/reset-password" method="post" class="card card-body">
 			<h2 class="mb-3">Đặt lại mật khẩu</h2>
