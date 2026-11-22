@@ -90,6 +90,60 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	// ===== Hồ sơ =====
+
+	@Override
+	public String checkProfile(User account, String fullName, String phone, String email) {
+		String error = ValidationUtil.validateValue(User.class, "fullName", fullName);
+		if (error == null) {
+			error = ValidationUtil.validateValue(User.class, "phone", phone);
+		}
+		if (error == null) {
+			error = ValidationUtil.validateValue(User.class, "email", email);
+		}
+		if (error != null) {
+			return error;
+		}
+		// Chỉ kiểm tra trùng khi đổi giá trị (giá trị cũ là của chính mình)
+		if (!phone.isEmpty() && !phone.equals(account.getPhone()) && userDao.checkExistPhone(phone)) {
+			return "Số điện thoại đã tồn tại!";
+		}
+		if (!email.equalsIgnoreCase(account.getEmail()) && userDao.checkExistEmail(email)) {
+			return "Email đã tồn tại!";
+		}
+		return null;
+	}
+
+	@Override
+	public User updateProfile(User account, String fullName, String phone, String avatar) {
+		userDao.updateProfile(account.getId(), fullName, phone, avatar == null ? account.getAvatar() : avatar);
+		return userDao.findByUsername(account.getUserName());
+	}
+
+	@Override
+	public PendingOtp sendChangeEmailOtp(User account, String newEmail) {
+		// Bản sao chỉ mang email mới -> sendOtpMail gửi tới email mới, không đụng user trong session
+		User user = new User();
+		user.setId(account.getId());
+		user.setUserName(account.getUserName());
+		user.setEmail(newEmail);
+		return startOtp(new PendingOtp(user, "xác nhận đổi email"));
+	}
+
+	@Override
+	public String changeEmail(PendingOtp pending, String otp) {
+		String error = checkOtp(pending, otp);
+		if (error != null) {
+			return error;
+		}
+		// Trong lúc chờ OTP có thể người khác đã dùng email này -> kiểm tra lại trước khi lưu
+		if (userDao.checkExistEmail(pending.getUser().getEmail())) {
+			return "Email đã tồn tại!";
+		}
+		userDao.updateEmail(pending.getUser().getId(), pending.getUser().getEmail());
+		return null;
+	}
+
 	// ===== Dùng chung =====
 
 	@Override
