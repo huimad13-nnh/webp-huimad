@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import io.github.huimad13.utils.Constant;
 
-// Quản lý video của mình -> phải đăng nhập. /video/detail để công khai.
-@WebFilter(urlPatterns = { "/video", "/video/add", "/video/edit", "/video/delete" })
+// Hồ sơ + quản lý video của mình -> phải đăng nhập. /video/detail để công khai.
+@WebFilter(urlPatterns = { "/video", "/video/add", "/video/edit", "/video/delete", "/profile", "/profile/verify" })
 public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

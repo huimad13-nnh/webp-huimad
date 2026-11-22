@@ -51,6 +51,25 @@ public class UserDaoImpl implements UserDao {
 				.executeUpdate());
 	}
 
+	@Override
+	public void updateProfile(int id, String fullName, String phone, String avatar) {
+		inTransaction(em -> em.createQuery(
+				"UPDATE User u SET u.fullName = :fullName, u.phone = :phone, u.avatar = :avatar WHERE u.id = :id")
+				.setParameter("fullName", fullName)
+				.setParameter("phone", phone)
+				.setParameter("avatar", avatar)
+				.setParameter("id", id)
+				.executeUpdate());
+	}
+
+	@Override
+	public void updateEmail(int id, String email) {
+		inTransaction(em -> em.createQuery("UPDATE User u SET u.email = :email WHERE u.id = :id")
+				.setParameter("email", email)
+				.setParameter("id", id)
+				.executeUpdate());
+	}
+
 	// begin -> làm việc -> commit; lỗi thì rollback
 	private void inTransaction(Consumer<EntityManager> work) {
 		EntityManager em = JPAConfig.getEntityManager();

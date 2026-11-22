@@ -11,6 +11,10 @@ public interface UserDao {
 
 	void updatePassword(int id, String password);
 
+	void updateProfile(int id, String fullName, String phone, String avatar);
+
+	void updateEmail(int id, String email);
+
 	boolean checkExistEmail(String email);
 
 	boolean checkExistUsername(String username);

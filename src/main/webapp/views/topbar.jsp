@@ -16,7 +16,13 @@
 						<a class="link-light me-3" href="${ctx}/admin/category/list">Quản lý danh mục</a>
 					</c:if>
 					<a class="link-light me-3" href="${ctx}/video">Video của tôi</a>
-					Xin chào <b><c:out value="${sessionScope.account.fullName}" /></b> |
+					<a class="link-light me-3 text-decoration-none" href="${ctx}/profile">
+						<c:if test="${not empty sessionScope.account.avatar}">
+							<img src="<c:out value='${sessionScope.account.avatar}'/>" alt="" class="rounded-circle"
+								style="width: 28px; height: 28px; object-fit: cover">
+						</c:if>
+						Xin chào <b><c:out value="${sessionScope.account.fullName}" /></b>
+					</a> |
 					<a class="link-light" href="${ctx}/logout">Đăng xuất</a>
 				</c:otherwise>
 			</c:choose>
